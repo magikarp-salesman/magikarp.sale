@@ -1,12 +1,25 @@
 # MAGIKARP SALESMAN
 
-## [Keybase](https://keybase.io)
+## [GitHub](https://github.com/magikarp-salesman)
 
-I'm on [keybase](https://keybase.io), this website is hosted on [keybase](https://keybase.io), everything is [keybase](https://keybase.io)! ( btw add me on [keybase](https://keybase.io))
+I'm on [github](https://github.com/magikarp-salesman), this website is hosted on [github](https://github.com/magikarp-salesman/magikarp.sale), everything is [github](https://github.com/magikarp-salesman)! ( btw star me on [github](https://github.com/magikarp-salesman) )
 
-[magikarp-salesman keybase profile](https://keybase.io/magikarpsalesman)
+[magikarp-salesman github profile](https://github.com/magikarp-salesman)
 
 ## Blog
+
+### Static hosting shenanigans
+
+> After struggling with the multiple static site sites and cdn providers out there I've decided to host
+> this website in the github pages platform
+> 
+> 1. keybase seemed promissing but the kbpbot was not working and the support for fixing it wasn't there
+> (from what I heard they have been focused on other products since they were acquired by Zoom)
+> 1. fast.io service seemed good at first but refuses to render md/html or even index files without a premium account
+> 
+> So for now GitHub is clearly the winner, hit me up if you find simple static site web hosting with no fuss and TLS support.
+>
+> - Sat 05 Sep 2020 11:29:14 PM UTC
 
 ### Long live the personal website
 
@@ -21,3 +34,4 @@ I'm on [keybase](https://keybase.io), this website is hosted on [keybase](https:
 Just another boring developer having *"fun"* with mundane stuff 🤓.
 
 ![magikarp sale](magikarp_salesman_deal.png)
+
