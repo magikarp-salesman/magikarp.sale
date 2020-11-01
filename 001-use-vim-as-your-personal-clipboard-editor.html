@@ -1037,65 +1037,119 @@
 }</style>
     </head>
     <body>
-	<main class="markdown-body"><h1>MAGIKARP SALESMAN</h1>
+	<main class="markdown-body">
+		<h1>Use vIM as your personal clipboard text editor</h1>
 
-<h2><a href="https://github.com/magikarp-salesman">GitHub</a></h2>
+<p>Truth be told I&rsquo;ve always wanted to make vIM my personal editor, not just a simple terminal workaround to hammer out config files nor as a true IDE full of plugins and bling, <em>no no no</em>, I wanted something much simpler! I wanted that <strong>everytime</strong> I have text on screen, just let me do my <strong>vIM black magic</strong> on it! simple! or so it seemed&hellip;</p>
 
-<p>I&rsquo;m on <a href="https://github.com/magikarp-salesman">github</a>, this website is hosted on <a href="https://github.com/magikarp-salesman/magikarp.sale">github</a>, everything is <a href="https://github.com/magikarp-salesman">github</a>! ( btw star me on <a href="https://github.com/magikarp-salesman">github</a> )</p>
+<p>Over the years I&rsquo;ve tried a lot of alternatives, I&rsquo;ve had a shortcut to start vim in half of the screen in a terminal for a while, used vim inside Eclipse java-based terminal ( yes really! ), used <a href="https://vimium.github.io/">vimium</a> and <a href="http://appsweets.net/wasavi/">wasavi</a> on my browser, had full vim keybindings configured in IntelliJ, shared my home folder or documents over ssh/ftp/svn/git and even a VBScript workaround to edit <a href="https://www.vim.org/scripts/script.php?script_id=3087">outlook emails in vim!!!</a></p>
 
-<p><a href="https://github.com/magikarp-salesman">magikarp-salesman github profile</a></p>
+<p>Crazy crazy stuff I know, but I was desperate, here I have all the power in my hands and now I can&rsquo;t integrate it normally in my daily workflow, from time to time I had to use some kind of external GUI text editor bloated or worse, using VSCode with its broken vim javascript plugin running on a monster <strong>600MB</strong> instance of &hellip; text 😞 uurgh!</p>
 
-<h2>Blog</h2>
+<p>When I arrive home sudently everything is different, all my workflow is integrated, my <code>.vimrc</code> is global to all my machines and even the applications try to use vim as my default text editor, in my world everything works and <em>vIM is king!</em> 👑 &hellip;but recently another fallback, I had to switch to my company MacBook Pro  and suddently everything is chaos again, different keyboard and keybinds, different applications, different shell&hellip; I had to start from scratch, battle my way onto the perfect integration again!</p>
 
-<h3>Use vim as your personal clipboard editor</h3>
+<h2>The light</h2>
 
-<blockquote>
-<p>Truth be told I’ve always wanted to make vIM my personal editor, not just a simple terminal workaround to hammer out config files nor as a true IDE full of plugins and bling, no no no, I wanted something much simpler! I wanted that everytime I have text on screen, just let me do my vIM black magic on it! simple! or so it seemed…</p>
+<p>But now I&rsquo;ve found a new solution something that will actually help me work with this</p>
 
-<p>Over the years I’ve tried a lot of alternatives, I’ve had a shortcut &hellip;</p>
+<p>I&rsquo;ve found a way to integrate vIM with your <strong>clipboard</strong> in a seemless way and letting you change everything you see for all that is needed using your best keystrokes.</p>
 
-<p><a href="001-use-vim-as-your-personal-clipboard-editor.html">continue reading</a></p>
+<p>The trick is that since all applications know how to talk to the MacOS clipboard, If I use vIM to change whatever is in there I&rsquo;ll be able to edit.. <em>anything!!</em></p>
+
+<p>Seeing that we are using a Mac we needed to have something like a GUI to run this, we could run it inside <em>iTerm2</em> but I found that the integration itself is not great, I&rsquo;ve experienced some crashes with large buffers or weird plugins and the iTerm2 keybinds can affect the way that you choose your leader keys, also for some reason I didn&rsquo;t find a simple way to configure it to start vim with a custom profile without tinkering with it for a long time.</p>
+
+<h2>Enter MacVim</h2>
+
+<p>So what the hell is <strong><a href="https://github.com/macvim-dev/macvim">MacVim</a></strong> ??</p>
+
+<p>Well it&rsquo;s vim.. for mac! It&rsquo;s as simple as that, you can install and it will run vim mostly in the way that you use the normal one but inside it&rsquo;s own window.</p>
+
+<p>Assuming you have brew it&rsquo;s simple enough to install, just go to your terminal and type the following:</p>
+
+<pre><code>brew install macvim --with-override-system-vim
+brew linkapps
+</code></pre>
+
+<p>This will override your current vim installation and now you just have to link the binary itself:</p>
+
+<p>Edit your shell startup files to ensure that <code>/usr/local/bin</code> comes first in your <code>$PATH</code>.</p>
+
+<p>If you use vim as <code>$VISUAL</code> or <code>$EDITOR</code>, add <code>export VISUAL='mvim -f'</code> to your environment (details).</p>
+
+<p>Check that you installed everything correctly by running</p>
+
+<pre><code>brew doctor
+</code></pre>
+
+<p>Now, you can run the graphical MacVim on a file by running <code>mvim foo.txt</code> from the command-line. Or, you can run the text-based editor by running <code>vim foo.txt</code>. Also, if other programs (e.g., git) fork off a separate editor, they&rsquo;ll run the graphical MacVim.</p>
+
+<p>Configure your <code>.vimrc</code> in Vim/MacVim with your favorite plugins and defaults and test it by calling it from the command line to make sure it is by your liking.</p>
+
+<p><strong>important:</strong> you also have to go into MacVim options and toggle the <code>After last window exit: Quit vim</code></p>
+
+<p><img src="001-use-vim-as-your-personal-clipboard-editor/quitvim.png" alt="quitvim" /></p>
+
+<p>This will be important further on&hellip;</p>
+
+<h2>The black magic stuff</h2>
+
+<p>Now this is what we do best, so now it&rsquo;s just a matter of&hellip; well&hellip; starting it with &hellip; stuff.</p>
+
+<p>OK let&rsquo;s go try this first, we need a way to script something&hellip; in MacOS that means <strong>Automator</strong> 🤖</p>
+
+<p>Open automator and start by creating a new script:</p>
+
+<p><img src="001-use-vim-as-your-personal-clipboard-editor/new.png" alt="new" /></p>
+
+<p>Choose &ldquo;Application&rdquo; from the following dialog:</p>
+
+<p><img src="001-use-vim-as-your-personal-clipboard-editor/application.png" alt="application" /></p>
+
+<p>Choose &ldquo;Run Shell Script&rdquo; from the actions tree:</p>
+
+<p><img src="001-use-vim-as-your-personal-clipboard-editor/runscript.png" alt="run-shell-script" /></p>
+
+<p>In the action itself type the following <em>incantation</em>:</p>
+
+<pre><code>/usr/local/bin/mvim +pu+ &quot;+$d&quot; +1 &quot;+nnoremap &lt;buffer&gt; ZZ :%y+&lt;CR&gt;ZQ&quot; &quot;+set nomod&quot;
+</code></pre>
+
+<p><img src="001-use-vim-as-your-personal-clipboard-editor/script.png" alt="run-shell-script" /></p>
+
+<p>Save the new file on a folder that Spotlight can find like your user home folder and name it somthing you like, I&rsquo;ve named mine just <code>vi</code></p>
+
+<p><img src="001-use-vim-as-your-personal-clipboard-editor/save.png" alt="save" /></p>
+
+<h2>It just&hellip; Works!</h2>
+
+<p>So now the big reveal, how does it all work? How do I cast my new spell?</p>
+
+<p>The workflow now will be the following:</p>
 
 <ul>
-<li>Sun 01 Nov 2020 04:28:36 PM UTC</li>
-</ul>
-</blockquote>
-
-<h3>Static hosting shenanigans</h3>
-
-<blockquote>
-<p>After struggling with the multiple static site sites and cdn providers out there I&rsquo;ve decided to host
-this website in the github pages platform</p>
-
-<ol>
-<li>keybase seemed promissing but the kbpbot was not working and the support for fixing it wasn&rsquo;t there
-(from what I heard they have been focused on other products since they were acquired by Zoom)</li>
-<li>fast.io service seemed good at first but refuses to render md/html or even index files without a premium account</li>
-</ol>
-
-<p>So for now GitHub is clearly the winner, hit me up if you find simple static site web hosting with no fuss and TLS support.</p>
+<li>Copy something you want to edit to the clipboard (Command+A Command+C)</li>
+<li>Launch Spotlight (Command+Space) and type &ldquo;vi&rdquo;
 
 <ul>
-<li>Sat 05 Sep 2020 11:29:14 PM UTC</li>
+<li>(Alternatively you can also trigger it using a custom keybind)</li>
+</ul></li>
+<li>MacVim will start with all your clipboard content</li>
+<li>Use your vIM mastery to edit everything as you like</li>
+<li>When you are done use <code>ZZ</code> to quit vim, if you want to ignore your edit just use <code>:q!</code> or <code>:exit</code> to exit MacVim without saving</li>
+<li>All your changes are now in your clipboard, paste it wherever you want</li>
+<li>Done.</li>
 </ul>
-</blockquote>
 
-<h3>Long live the personal website</h3>
+<p>This is so easy and intuitive that it will become your second nature, use it for ANYTHING, edit emails, edit command line calls, edit json files, jwt tokens&hellip; the sky is the limit, <strong>if it can be copied to your clipboard you can edit it !</strong></p>
 
-<blockquote>
-<p>This is my first iteration on having a personal website in maybe 10 years, so let&rsquo;s see how it pans out.</p>
+<p>Here&rsquo;s a little video:</p>
 
-<p>Hopefully I won&rsquo;t get bothered  with it and you will actually have something fun to see here.</p>
+<p>See how easy that was, this integration is everything I could have asked for, I can quickly change emails, markdown pages even chat messages with the bindings and plugins I know and love without having to deal with clumsy integrations or weird workarounds.</p>
 
-<ul>
-<li>Tue 01 Sep 2020 02:33:47 PM UTC</li>
-</ul>
-</blockquote>
+<p>From the last month until now I&rsquo;ve been using it more and more and I now actually use it a lot for debgging sessions, fetch the data from the database, filter for a keyword I want, run the output through jq and send it to someone who needs that data to run the query. easy! and best of all it allows me to finally have a seamless experience and continue to imporve my vIM skills for the future.</p>
 
-<h2>About me</h2>
+<p>Hope you liked this small(ish) tutorial</p>
 
-<p>Just another boring developer having <em>&ldquo;fun&rdquo;</em> with mundane stuff 🤓.</p>
-
-<p><img src="magikarp_salesman_deal.png" alt="magikarp sale" /></p>
-	</main></body>
+<p>- <a href="https://magikarp.sale">Magikarp-salesman</a></p></main>
+    </body>
 </html>

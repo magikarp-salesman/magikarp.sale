@@ -8,6 +8,16 @@ I'm on [github](https://github.com/magikarp-salesman), this website is hosted on
 
 ## Blog
 
+### Use vim as your personal clipboard editor
+
+> Truth be told I’ve always wanted to make vIM my personal editor, not just a simple terminal workaround to hammer out config files nor as a true IDE full of plugins and bling, no no no, I wanted something much simpler! I wanted that everytime I have text on screen, just let me do my vIM black magic on it! simple! or so it seemed…
+> 
+> Over the years I’ve tried a lot of alternatives, I’ve had a shortcut ...
+>
+> [continue reading](001-use-vim-as-your-personal-clipboard-editor.html)
+>
+> - Sun 01 Nov 2020 04:28:36 PM UTC
+
 ### Static hosting shenanigans
 
 > After struggling with the multiple static site sites and cdn providers out there I've decided to host
